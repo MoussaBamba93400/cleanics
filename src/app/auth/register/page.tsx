@@ -9,7 +9,7 @@ const getErrorMessage = () => {
 
 export default function RegisterPage() {
 
-    getErrorMessage();
+    
 
     return (
         <div>
