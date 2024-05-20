@@ -1,14 +1,17 @@
 import { get } from "http";
 
 
+
 const getErrorMessage = () => {
     throw new Error('Not implemented');
 }
 
 const fetchTest = async () => {
+
+    const appUrl = process.env.APP_URL;
     console.log('fetchTest');
     try {
-        const response = await fetch('http://localhost:3000/api/', {
+        const response = await fetch(`${appUrl}/api/`, {
             method: 'GET',
         });
       ;
