@@ -14,8 +14,41 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+model users {
   id    Int     @id @default(autoincrement())
+  first_name String?
+  last_name String?
   email String  @unique
-  name  String?
+  username  String
+  address String
+  bio String @db.Text
+  phone_number String
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  users_roles users_roles[]
+  services services[]
+}
+
+model roles {
+  id          Int           @id @default(autoincrement())
+  name        String
+  users_roles users_roles[]
+}
+
+model users_roles {
+  id      Int   @id @default(autoincrement())
+  role    roles @relation(fields: [role_id], references: [id])
+  role_id Int
+  user users @relation(fields : [user_id], references: [id])
+  user_id Int
+  @@unique([role_id, user_id])
+}
+
+model services {
+  id      Int   @id @default(autoincrement())
+  name String
+  description String @db.Text
+  price Float
+  provider users @relation(fields: [provider_id], references: [id])
+  provider_id Int
 }
